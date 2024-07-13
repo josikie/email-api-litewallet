@@ -7,7 +7,7 @@ sgMail.setApiKey(process.env.API_KEY);
 
 const template = process.env.TEMPLATE_ID;
 
-function sendEmail(data){
+async function sendEmail(data){
     var msg = {
         to: data.receiver,
         from: data.sender,
@@ -16,15 +16,16 @@ function sendEmail(data){
         dynamic_template_data: {
             url: data.url,
         }
-    };
+    }; 
 
-    sgMail.send(msg, (error, result) => {
-        if(error){
-            console(error)
-        } else {
-            console.log("Email Sent!");
-        }
-    });   
+    try {
+        await sgMail.send(msg);
+        console.log("Email Sent!");
+        return { success: true, message: "Email sent successfully" };
+    } catch (error) {
+        console.error(error);
+        return { success: false, message: "Error sending email" };
+    }
 }
 
 exports.sendEmail = sendEmail;

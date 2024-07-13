@@ -57,7 +57,7 @@ app.get('/verify/:token&:email&:country', (req, res) => {
     })
 });
 
-app.post('/sendEmail', (req, res) => {
+app.post('/sendEmail', async (req, res) => {
     const body = req.body
     console.log(body)
     var email_receiver = body.email;
@@ -68,15 +68,27 @@ app.post('/sendEmail', (req, res) => {
         url:"https://email-api-litewallet.vercel.app/verify/"+tokens+"&"+email_receiver+"&"+country
     }
     
-    sender.sendEmail(data, (error) => {
-        if (error) {
-            console.error(error);
-            res.status(500).json({ success: false, message: 'Error sending email' });
+    // sender.sendEmail(data, (error) => {
+    //     if (error) {
+    //         console.error(error);
+    //         res.status(500).json({ success: false, message: 'Error sending email' });
+    //     } else {
+    //         console.log("Email Sent!");
+    //         res.status(200).json({ success: true, message: 'Email sent successfully' });
+    //     }
+    // });
+
+    try {
+        const emailResult = await sender.sendEmail(data);
+        if (emailResult.success) {
+            res.status(200).json({ message: 'Email sent successfully' });
         } else {
-            console.log("Email Sent!");
-            res.status(200).json({ success: true, message: 'Email sent successfully' });
+            res.status(500).json({ message: 'Error sending email' });
         }
-    });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
 })
 
 app.listen(PORT, (error) =>{
