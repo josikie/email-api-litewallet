@@ -12,7 +12,6 @@ client.setApiKey(process.env.API_KEY)
 const PORT = process.env.PORT || 3000;
 const SECRET_KEY = process.env.SECRET_KEY;
 const SENDER = process.env.SENDER
-const template = process.env.TEMPLATE_ID;
 
 
 app.use(express.json())
@@ -63,28 +62,13 @@ app.post('/sendEmail', (req, res) => {
     console.log(body)
     var email_receiver = body.email;
     var country = body.country;
-    var msg = {
-        to: email_receiver,
-        from: SENDER,
-        templateId: template,
-
-        dynamic_template_data: {
-            url: "https://email-api-litewallet.vercel.app/verify/"+tokens+"&"+email_receiver+"&"+country
-        }
-    };
-
-    sgMail.send(msg, (error, result) => {
-        if(error){
-            res.json({
-                "error":error
-            })
-        } else {
-            res.json({
-                "msg":"Email Already Sent!"
-            });
-            console.log("Email Sent!");
-        }
-    });   
+    var data = {
+        sender: SENDER,
+        receiver: email_receiver,
+        url:"https://email-api-litewallet.vercel.app/verify/"+tokens+"&"+email_receiver+"&"+country
+    }
+    
+    sender.sendEmail(data);
 })
 
 app.listen(PORT, (error) =>{
