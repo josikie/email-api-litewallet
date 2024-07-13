@@ -53,6 +53,10 @@ app.get('/verify/:token&:email&:country', (req, res) => {
                 console.log(response.statusCode);
                 console.log(response.body)
             }).catch(error=> {console.log(error)});
+            client.request(request).then(([response, body])=>{
+                console.log(response.statusCode);
+                console.log(response.body)
+            }).catch(error=> {console.log(error)});
         }
     })
 });
