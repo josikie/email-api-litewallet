@@ -68,7 +68,6 @@ app.post('/sendEmail', (req, res) => {
     }
     
     var response = sender.sendEmail(data);
-    sender.sendEmail(data);
     if(response == 400){
         res.json({
             code: response,
