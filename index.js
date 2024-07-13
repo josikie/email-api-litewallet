@@ -69,7 +69,7 @@ app.post('/sendEmail', (req, res) => {
     
     sender.sendEmail(data);
 
-    res.status(200).json({ success: true, message: 'Email sent successfully'})
+    return new Response('{}', { status: 200 });
 })
 
 app.listen(PORT, (error) =>{
