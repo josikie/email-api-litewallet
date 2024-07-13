@@ -68,8 +68,6 @@ app.post('/sendEmail', (req, res) => {
     }
     
     sender.sendEmail(data);
-
-    return new Response('{}', { status: 200 });
 })
 
 app.listen(PORT, (error) =>{
