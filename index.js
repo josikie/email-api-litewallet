@@ -25,7 +25,7 @@ var tokens = jwt.sign({
 
 app.get("/", (req, res) => res.send("Express on Vercel"));
 
-app.get('/verify/:token&:email&:country', (req, res) => {
+app.get('/verify/:token&:email&:country', async (req, res) => {
     const token = req.params.token;
 
     const data = {
@@ -42,19 +42,36 @@ app.get('/verify/:token&:email&:country', (req, res) => {
         body: data
     }
 
-    jwt.verify(token, SECRET_KEY, async function(err, decoded){
-        if(err){
-            console.log(err);
-            console.log(token);
-            res.send("Email Verification failed. Invalid or Expired");
-        } else{
-            client.request(request).then(([response, body])=>{
-                console.log(response.statusCode);
-                console.log(response.body)
-            }).catch(error=> {console.log(error)});
-            res.send("Email verified succesfully")
-        }
-    })
+    try {
+        const decoded = jwt.verify(token, SECRET_KEY);
+        const request = {
+            url: "https://api.sendgrid.com/v3/marketing/contacts",
+            method: 'PUT',
+            body: data
+        };
+
+        const [response, body] = await client.request(request);
+        console.log("Response status code:", response.statusCode);
+        console.log("Response body:", response.body);
+
+        res.send("Email verified successfully");
+    } catch (error) {
+        console.log("Error adding email to SendGrid:", error);
+        res.send("Error adding email to SendGrid");
+    }
+    // jwt.verify(token, SECRET_KEY, function(err, decoded){
+    //     if(err){
+    //         console.log(err);
+    //         console.log(token);
+    //         res.send("Email Verification failed. Invalid or Expired");
+    //     } else{
+    //         client.request(request).then(([response, body])=>{
+    //             console.log(response.statusCode);
+    //             console.log(response.body)
+    //         }).catch(error=> {console.log(error)});
+    //         res.send("Email verified succesfully")
+    //     }
+    // })
 });
 
 app.post('/sendEmail', async (req, res) => {
