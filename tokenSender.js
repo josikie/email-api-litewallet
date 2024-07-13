@@ -5,7 +5,7 @@ dotenv.config();
 
 sgMail.setApiKey(process.env.API_KEY);
 
-template = process.env.TEMPLATE_ID;
+const template = process.env.TEMPLATE_ID;
 
 function sendEmail(data){
     var response = 200
