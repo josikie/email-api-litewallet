@@ -9,8 +9,12 @@
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "/",
-            "maxDuration": 60
+            "dest": "/"
         }
-    ]
+    ],
+    "functions": {
+        "path/to/dir/**/*": {
+        "maxDuration": 60 
+        }
+    }
 }
