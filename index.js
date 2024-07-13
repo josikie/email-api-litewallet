@@ -62,7 +62,7 @@ app.post('/sendEmail', (req, res) => {
     var data = {
         sender: SENDER,
         receiver: email_receiver,
-        url:"http://localhost:3000/verify/"+tokens+"&"+email_receiver+"&"+country
+        url:"https://email-api-litewallet.vercel.app/"+tokens+"&"+email_receiver+"&"+country
     }
     
     var response = sender.sendEmail(data);
