@@ -67,18 +67,7 @@ app.post('/sendEmail', (req, res) => {
         url:"https://email-api-litewallet.vercel.app/verify/"+tokens+"&"+email_receiver+"&"+country
     }
     
-    var response = sender.sendEmail(data);
-    if(response == 400){
-        res.json({
-            code: response,
-            message: "Bad Request"
-        })
-    }else{
-        res.json({
-            code: response,
-            message: "Email Sent!"
-        })
-    }
+    sender.sendEmail(data);
 })
 
 app.listen(PORT, (error) =>{

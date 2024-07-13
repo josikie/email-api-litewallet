@@ -22,14 +22,10 @@ function sendEmail(data){
     sgMail.send(msg, (error, result) => {
         if(error){
             console.log(error)
-            response = 400
         } else {
             console.log("Email Sent!")
-            response = 200
         }
-    })
-    return response;
-    
+    })    
 }
 
 exports.sendEmail = sendEmail;
