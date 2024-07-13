@@ -64,21 +64,21 @@ app.post('/sendEmail', (req, res) => {
     var data = {
         sender: SENDER,
         receiver: email_receiver,
-        url:"https://email-api-litewallet.vercel.app/"+tokens+"&"+email_receiver+"&"+country
+        url:"https://email-api-litewallet.vercel.app/verify/"+tokens+"&"+email_receiver+"&"+country
     }
     
     sender.sendEmail(data);
-    // if(response == 400){
-    //     res.json({
-    //         code: response,
-    //         message: "Bad Request"
-    //     })
-    // }else{
-    //     res.json({
-    //         code: response,
-    //         message: "Email Sent!"
-    //     })
-    // }
+    if(response == 400){
+        res.json({
+            code: response,
+            message: "Bad Request"
+        })
+    }else{
+        res.json({
+            code: response,
+            message: "Email Sent!"
+        })
+    }
 })
 
 app.listen(PORT, (error) =>{
