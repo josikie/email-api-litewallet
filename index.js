@@ -67,9 +67,16 @@ app.post('/sendEmail', (req, res) => {
         url:"https://email-api-litewallet.vercel.app/verify/"+tokens+"&"+email_receiver+"&"+country
     }
     
-    sender.sendEmail(data);
-    res.json({
+    // sender.sendEmail(data);
 
+    sender.sendEmail(data, (error) => {
+        if (error) {
+            console.error(error);
+            res.status(400).json({ success: false, message: 'Error sending email' });
+        } else {
+            console.log("Email Sent!");
+            res.status(200).json({ success: true, message: 'Email sent successfully' });
+        }
     });
 })
 
