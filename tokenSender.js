@@ -23,7 +23,7 @@ function sendEmail(data){
         if(error){
             msg = error
         } else {
-            msg = "Email Sent!"
+            msg = "Email Already Sent!"
             console.log("Email Sent!");
         }
     });   
