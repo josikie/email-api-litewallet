@@ -22,6 +22,8 @@ var tokens = jwt.sign({
 }, SECRET_KEY, { expiresIn: '24h' }  
 );    
 
+app.get("/", (req, res) => res.send("Express on Vercel"));
+
 app.get('/verify/:token&:email&:country', (req, res) => {
     const token = req.params.token;
 
@@ -88,3 +90,4 @@ app.listen(PORT, (error) =>{
 );
 
 
+module.exports = app;
