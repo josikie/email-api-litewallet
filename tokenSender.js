@@ -8,7 +8,6 @@ sgMail.setApiKey(process.env.API_KEY);
 const template = process.env.TEMPLATE_ID;
 
 function sendEmail(data){
-    var response = 200
     var msg = {
         to: data.receiver,
         from: data.sender,
@@ -22,10 +21,12 @@ function sendEmail(data){
     sgMail.send(msg, (error, result) => {
         if(error){
             console.log(error)
+            return false
         } else {
             console.log("Email Sent!")
+            return true
         }
-    })    
+    })   
 }
 
 exports.sendEmail = sendEmail;
