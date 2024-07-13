@@ -48,11 +48,11 @@ app.get('/verify/:token&:email&:country', (req, res) => {
             console.log(token);
             res.send("Email Verification failed. Invalid or Expired");
         } else{
-            res.send("Email verified succesfully")
             client.request(request).then(([response, body])=>{
                 console.log(response.statusCode);
                 console.log(response.body)
             }).catch(error=> {console.log(error)});
+            res.send("Email verified succesfully")
         }
     })
 });
