@@ -68,6 +68,10 @@ app.post('/sendEmail', (req, res) => {
     }
     
     sender.sendEmail(data);
+    res.json({
+        code: 200,
+        message: "Email Sent!"
+    })
 })
 
 app.listen(PORT, (error) =>{
