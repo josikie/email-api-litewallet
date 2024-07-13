@@ -25,7 +25,7 @@ var tokens = jwt.sign({
 
 app.get("/", (req, res) => res.send("Express on Vercel"));
 
-app.get('/verify/:token&:email&:country', (req, res) => {
+app.get('/verify/:token&:email&:country', async (req, res) => {
     const token = req.params.token;
 
     const data = {
@@ -42,21 +42,23 @@ app.get('/verify/:token&:email&:country', (req, res) => {
         body: data
     }
 
-    jwt.verify(token, SECRET_KEY, function(err, decoded){
+    jwt.verify(token, SECRET_KEY, async function(err, decoded){
         if(err){
             console.log(err);
             console.log(token);
             res.send("Email Verification failed. Invalid or Expired");
         } else{
             res.send("Email verified succesfully")
-            client.request(request).then(([response, body])=>{
-                console.log(response.statusCode);
-                console.log(response.body)
-            }).catch(error=> {console.log(error)});
-            client.request(request).then(([response, body])=>{
-                console.log(response.statusCode);
-                console.log(response.body)
-            }).catch(error=> {console.log(error)});
+            const [response, body] = await new Promise((resolve, reject) => {
+                client.request(request, (error, response, body) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve([response, body]);
+                    }
+                });
+            });
+            console.log(response.status_code);
         }
     })
 });
