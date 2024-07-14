@@ -2,9 +2,9 @@
 ## Features:
 | Task | Progress | 
 |--------|--------|
-| Send link verification to user who signed up via email | Done | 
-| Added User to SendGrid contact list after user get verified | Done | 
-| Send template SendGrid about the user successfuly signed up after they get added to SendGrid contact list | In Progress | 
+| Send link verification via email to user who wants to sign up | Done | 
+| Added User to SendGrid contact list after user get verified (they click button verify from email we sent) | Done | 
+| Send template SendGrid about the user successfuly signed up after they get added to SendGrid contact list (After got added to contact, we sent them email about them succesfully subscribe/signed up) | In Progress | 
 
 ## TODO:
 | Task | Progress | 
