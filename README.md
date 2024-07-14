@@ -41,7 +41,7 @@
 1. Install all the needed independencies (will write here after all the TODO done).
 2. Provide the environment variables (PORT, API_KEY, SENDER, SECRET_KEY, TEMPLATE_ID)
 3. Production: npm run
-4. Dev Mode: npm run dev
+4. Dev Mode/local: npm run dev 
 5. Check endpoint GET /
 
    
