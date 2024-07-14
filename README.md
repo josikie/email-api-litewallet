@@ -17,6 +17,7 @@
 | Add template ids to send to user afer they got verified.| In Progress |
 | Add endpoint for Send Email to inform user they are successfuly verified  | In Progress | 
 | Add first_name and last_name to endpoint send email | In Progress | 
+| Implement all with templates created from Litewallet and in Litewallet SendGrid (currently on my SendGrid) | In Progress |
 | Update css and html to adjust the new fields (first_name, and last_name) in litewallet.io form. | In Progress |
 | Update javascript in litewallet.io to fetch the api. | In Progress |
 
