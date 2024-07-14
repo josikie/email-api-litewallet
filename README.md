@@ -20,7 +20,7 @@
 | Update css and html to adjust the new fields (first_name, and last_name) in litewallet.io form. | In Progress |
 | Update javascript in litewallet.io to fetch the api. | In Progress |
 
-## API Endpoint (Current, will be updated after all TODO done)
+## API Endpoints (Current, will be updated after all TODO done)
 1. POST /sendEmail
    
    Example:
@@ -36,3 +36,11 @@
 
    Example: /verify/:jhyiaakooa00922nnss&:email@email.com&:Indonesia
 
+## How to run
+1. Install all the needed independencies (will write here after all the TODO done).
+2. Provide the environment variables (PORT, API_KEY, SENDER, SECRET_KEY, TEMPLATE_ID)
+3. Production: npm run
+4. Dev Mode: npm run dev
+5. Check endpoint GET /
+
+   
