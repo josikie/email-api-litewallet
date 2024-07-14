@@ -20,3 +20,14 @@
 | Update css and html to adjust the new fields (first_name, and last_name) in litewallet.io form. | In Progress |
 | Update javascript in litewallet.io to fetch the api. | In Progress |
 
+## API Endpoint (Current, will be updated after all TODO done)
+1. POST /sendEmail
+   Example:
+   ```{
+     "email":"email@email.com",
+     "country":"Indonesia"
+   }```
+2. GET /verify/:token&:email&:country
+   No need to provide json data. Provide token, email receiver, and country.
+   Example: /verify/:jhyiaakooa00922nnss&:email@email.com&:Indonesia
+
