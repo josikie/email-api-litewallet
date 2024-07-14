@@ -22,12 +22,17 @@
 
 ## API Endpoint (Current, will be updated after all TODO done)
 1. POST /sendEmail
+   
    Example:
-   ```{
+   ```
+   {
      "email":"email@email.com",
      "country":"Indonesia"
-   }```
-2. GET /verify/:token&:email&:country
+   }
+   ```
+3. GET /verify/:token&:email&:country
+   
    No need to provide json data. Provide token, email receiver, and country.
+
    Example: /verify/:jhyiaakooa00922nnss&:email@email.com&:Indonesia
 
