@@ -25,12 +25,14 @@ var tokens = jwt.sign({
 
 app.get("/", (req, res) => res.send("Express on Vercel"));
 
-app.get('/verify/:token&:email&:country', async (req, res) => {
+app.get('/verify/:token&:first_name&:last_name&:email&:country', async (req, res) => {
     const token = req.params.token;
 
     const data = {
         "contacts": [
             {
+                "first_name": req.params.first_name,
+                "last_name": req.params.last_name,
                 "email": req.params.email,
                 "country": req.params.country,
             }
@@ -77,9 +79,13 @@ app.get('/verify/:token&:email&:country', async (req, res) => {
 app.post('/sendEmail', async (req, res) => {
     const body = req.body
     console.log(body)
+    var first_name = req.first_name;
+    var last_name = req.last_name;
     var email_receiver = body.email;
     var country = body.country;
     var data = {
+        first_name: first_name,
+        last_name: last_name,
         sender: SENDER,
         receiver: email_receiver,
         url:"http://localhost:3000/verify/"+tokens+"&"+email_receiver+"&"+country
