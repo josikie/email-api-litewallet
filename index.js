@@ -18,12 +18,14 @@ app.use(express.json())
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
+const currentURL = window.location.href;
+
 var tokens = jwt.sign({
     data: 'Token Data'
 }, SECRET_KEY, { expiresIn: '24h' }  
 );    
 
-app.get("/", (req, res) => res.send("Express on Vercel"));
+app.get("/", (req, res) => res.send("API Called."));
 
 app.get('/verify/:token&:first_name&:last_name&:email&:country', async (req, res) => {
     const token = req.params.token;
@@ -88,7 +90,7 @@ app.post('/sendEmail', async (req, res) => {
         last_name: last_name,
         sender: SENDER,
         receiver: email_receiver,
-        url:"http://localhost:3000/verify/"+tokens+"&"+email_receiver+"&"+country
+        url: currentURL + "/verify/"+tokens+"&"+first_name+"&"+last_name+"&"+email_receiver+"&"+country
     }
     
     // for local only
