@@ -87,7 +87,7 @@ app.post('/sendEmail', async (req, res) => {
         last_name: last_name,
         sender: SENDER,
         receiver: email_receiver,
-        url: BASE_URL + "/verify/"+tokens+"&"+first_name+"&"+last_name+"&"+email_receiver+"&"+country
+        url: req.hostname + "/verify/"+tokens+"&"+first_name+"&"+last_name+"&"+email_receiver+"&"+country
     }
     
     // for local only
