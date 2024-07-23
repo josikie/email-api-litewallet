@@ -6,7 +6,6 @@ dotenv.config();
 sgMail.setApiKey(process.env.API_KEY);
 
 const TEMPLATE = process.env.TEMPLATE_ID;
-const TEMPLATE_SIGN_UP_SUCCESS = process.env.TEMPLATE_SIGN_UP_SUCCESS;
 
 async function sendEmail(data){
     var msg = {
@@ -29,21 +28,4 @@ async function sendEmail(data){
     }
 }
 
-async function sendEmailSuccess(data){
-    var msg = {
-        to: data.receiver,
-        from: data.sender,
-        templateId: TEMPLATE_SIGN_UP_SUCCESS
-    };
-
-    try {
-        await sgMail.send(msg);
-        return { success: true, message: "Email sent successfully" };
-    } catch (error) {
-        console.error(error);
-        return { success: false, message: error };
-    }
-}
-
-exports.sendEmailSuccess = sendEmailSuccess;
 exports.sendEmail = sendEmail;

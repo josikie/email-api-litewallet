@@ -8,14 +8,12 @@ dotenv.config();
 
 const app = express();
 
-client.setApiKey(process.env.API_KEY)
+client.setApiKey(process.env.API_KEY);
 const PORT = process.env.PORT || 3000;
 const SECRET_KEY = process.env.SECRET_KEY;
-const SENDER = process.env.SENDER
-const TEMPLATE_SIGN_UP_SUCCESS = process.env.TEMPLATE_SIGN_UP_SUCCESS;
+const SENDER = process.env.SENDER;
 
-
-app.use(express.json())
+app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
@@ -51,41 +49,9 @@ app.get('/verify/:token&:first_name&:last_name&:email&:country', async (req, res
         const response = await client.request(request);
         console.log("Response status code:", response.statusCode);
         console.log("Response body:", response.body);
-
+        res.send("Email Verified Successfully!");
     } catch (error) {
         console.log("Error adding email to SendGrid:", error);
-    }
-
-    try{
-        const data_email_success = {
-            "from": {
-                "email": SENDER
-            },
-            "personalizations": [
-                {
-                    "to": [
-                        {
-                            "email": emailUser
-                        }
-                    ],
-                }
-            ],
-            "template_id": TEMPLATE_SIGN_UP_SUCCESS
-        };
-
-        const req_success_email = {
-            url: "https://api.sendgrid.com/v3/mail/send",
-            method: 'POST',
-            body: data_email_success
-        }
-
-        const email_welcome = await client.request(req_success_email);
-        console.log("Response status code:", email_welcome.statusCode);
-        console.log("Response body:", email_welcome.body);
-        res.send("Email Verified Successfully!")
-    } catch (error) {
-        console.log("Error adding email to SendGrid:", error);
-        res.send("Error adding email to SendGrid");
     }
 });
 
@@ -101,7 +67,7 @@ app.post('/sendEmail', async (req, res) => {
         last_name: last_name,
         sender: SENDER,
         receiver: email_receiver,
-        url:"https://email-api-litewallet.vercel.app/verify/"+tokens+"&"+first_name+"&"+last_name+"&"+email_receiver+"&"+country
+        url: req.hostname + "/verify/"+tokens+"&"+first_name+"&"+last_name+"&"+email_receiver+"&"+country
     }
     
     // for local only
