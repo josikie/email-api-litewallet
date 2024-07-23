@@ -43,9 +43,6 @@ async function sendEmailSuccess(data){
         return { success: true, message: "Email sent successfully" };
     } catch (error) {
         console.error(error);
-        console.log("\n");
-        console.log(res);
-        console.log("\n");
         return { success: false, message: error };
     }
 }
