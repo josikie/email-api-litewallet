@@ -78,8 +78,8 @@ app.get('/verify/:token&:first_name&:last_name&:email&:country', async (req, res
 app.post('/sendEmail', async (req, res) => {
     const body = req.body
     console.log(body)
-    var first_name = req.first_name;
-    var last_name = req.last_name;
+    var first_name = body.first_name;
+    var last_name = body.last_name;
     var email_receiver = body.email;
     var country = body.country;
     var data = {
