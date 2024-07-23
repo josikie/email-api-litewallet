@@ -61,11 +61,6 @@ app.get('/verify/:token&:first_name&:last_name&:email&:country', async (req, res
         };
 
         const email_welcome = await sender.sendEmailSuccess(data_email_success);
-        if (email_welcome.success) {
-            res.status(200).json({ message: 'Email sent successfully' });
-        } else {
-            res.status(500).json({ message: 'Error sending email' });
-        }
         console.log("Response Code:", email_welcome.success);
         console.log("Response Body:", email_welcome.message);
         res.send("Email Verified Successfully!")
