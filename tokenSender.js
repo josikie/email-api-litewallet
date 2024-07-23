@@ -42,7 +42,7 @@ async function sendEmailSuccess(data){
         return { success: true, message: "Email sent successfully" };
     } catch (error) {
         console.error(error);
-        return { success: false, message: "There is error while sending email" };
+        return { success: false, message: error };
     }
 }
 
