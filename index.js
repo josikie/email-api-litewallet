@@ -80,8 +80,8 @@ app.get('/verify/:token&:first_name&:last_name&:email&:country', async (req, res
         }
 
         const email_welcome = await client.request(req_success_email);
-        console.log("Response status code:", response.statusCode);
-        console.log("Response body:", response.body);
+        console.log("Response status code:", email_welcome.statusCode);
+        console.log("Response body:", email_welcome.body);
         res.send("Email Verified Successfully!")
     } catch (error) {
         console.log("Error adding email to SendGrid:", error);
