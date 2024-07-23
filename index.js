@@ -50,28 +50,28 @@ app.get('/verify/:token&:email&:country', async (req, res) => {
             body: data
         };
 
-        const [response, body] = await client.request(request);
+        const response = await client.request(request);
         console.log("Response status code:", response.statusCode);
         console.log("Response body:", response.body);
 
-        res.send("Email verified successfully");
+    } catch (error) {
+        console.log("Error adding email to SendGrid:", error);
+    }
+
+    try{
+        const data_email_success = {
+            sender: SENDER,
+            receiver: req.params.email  
+        }  
+        const email_welcome = await sender.sendEmailSuccess(data_email_success);
+
+        console.log("Response Code:", email_welcome.success);
+        console.log("Response Body:", email_welcome.message);
+        res.send("Email Verified Successfully!")
     } catch (error) {
         console.log("Error adding email to SendGrid:", error);
         res.send("Error adding email to SendGrid");
     }
-    // jwt.verify(token, SECRET_KEY, function(err, decoded){
-    //     if(err){
-    //         console.log(err);
-    //         console.log(token);
-    //         res.send("Email Verification failed. Invalid or Expired");
-    //     } else{
-    //         client.request(request).then(([response, body])=>{
-    //             console.log(response.statusCode);
-    //             console.log(response.body)
-    //         }).catch(error=> {console.log(error)});
-    //         res.send("Email verified succesfully")
-    //     }
-    // })
 });
 
 app.post('/sendEmail', async (req, res) => {
@@ -82,9 +82,10 @@ app.post('/sendEmail', async (req, res) => {
     var data = {
         sender: SENDER,
         receiver: email_receiver,
-        url:"https://email-api-litewallet.vercel.app/verify/"+tokens+"&"+email_receiver+"&"+country
+        url:"http://localhost:3000/verify/"+tokens+"&"+email_receiver+"&"+country
     }
     
+    // for local only
     // sender.sendEmail(data, (error) => {
     //     if (error) {
     //         console.error(error);
@@ -95,6 +96,7 @@ app.post('/sendEmail', async (req, res) => {
     //     }
     // });
 
+    // for production only
     try {
         const emailResult = await sender.sendEmail(data);
         if (emailResult.success) {
