@@ -13,7 +13,6 @@ const PORT = process.env.PORT || 3000;
 const SECRET_KEY = process.env.SECRET_KEY;
 const SENDER = process.env.SENDER
 
-
 app.use(express.json())
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -88,7 +87,7 @@ app.post('/sendEmail', async (req, res) => {
         last_name: last_name,
         sender: SENDER,
         receiver: email_receiver,
-        url: req.hostname + "/verify/"+tokens+"&"+first_name+"&"+last_name+"&"+email_receiver+"&"+country
+        url: BASE_URL + "/verify/"+tokens+"&"+first_name+"&"+last_name+"&"+email_receiver+"&"+country
     }
     
     // for local only
