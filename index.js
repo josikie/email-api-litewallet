@@ -51,7 +51,6 @@ app.get('/verify/:token&:first_name&:last_name&:email&:country', async (req, res
         const response = await client.request(request);
         console.log("Response status code:", response.statusCode);
         console.log("Response body:", response.body);
-        res.send("Email Verified Successfully!");
     } catch (error) {
         console.log("Error adding email to SendGrid:", error);
     }
