@@ -26,13 +26,13 @@ app.get("/", (req, res) => res.send("API Called."));
 
 app.get('/verify/:token&:first_name&:last_name&:email&:country', async (req, res) => {
     const token = req.params.token;
-
+    const emailUser = req.params.email;
     const data = {
         "contacts": [
             {
                 "first_name": req.params.first_name,
                 "last_name": req.params.last_name,
-                "email": req.params.email,
+                "email": emailUser,
                 "country": req.params.country,
             }
         ]
@@ -62,7 +62,7 @@ app.get('/verify/:token&:first_name&:last_name&:email&:country', async (req, res
     try{
         const data_email_success = {
             sender: SENDER,
-            receiver: req.params.email  
+            receiver: emailUser 
         }  
         const email_welcome = await sender.sendEmailSuccess(data_email_success);
 
