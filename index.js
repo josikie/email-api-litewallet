@@ -12,6 +12,8 @@ client.setApiKey(process.env.API_KEY)
 const PORT = process.env.PORT || 3000;
 const SECRET_KEY = process.env.SECRET_KEY;
 const SENDER = process.env.SENDER
+const TEMPLATE_SIGN_UP_SUCCESS = process.env.TEMPLATE_SIGN_UP_SUCCESS;
+
 
 app.use(express.json())
 app.use(cors());
@@ -56,13 +58,30 @@ app.get('/verify/:token&:first_name&:last_name&:email&:country', async (req, res
 
     try{
         const data_email_success = {
-            sender: SENDER,
-            receiver: "kiejosi12@gmail.com" 
+            "from": {
+                "email": SENDER
+            },
+            "personalizations": [
+                {
+                    "to": [
+                        {
+                            "email": emailUser
+                        }
+                    ],
+                }
+            ],
+            "template_id": TEMPLATE_SIGN_UP_SUCCESS
         };
 
-        const email_welcome = await sender.sendEmailSuccess(data_email_success);
-        console.log("Response Code:", email_welcome.success);
-        console.log("Response Body:", email_welcome.message);
+        const req_success_email = {
+            url: "https://api.sendgrid.com/v3/mail/send",
+            method: 'POST',
+            body: data_email_success
+        }
+
+        const email_welcome = await client.request(req_success_email);
+        console.log("Response status code:", response.statusCode);
+        console.log("Response body:", response.body);
         res.send("Email Verified Successfully!")
     } catch (error) {
         console.log("Error adding email to SendGrid:", error);
