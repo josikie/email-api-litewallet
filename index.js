@@ -24,7 +24,7 @@ var tokens = jwt.sign({
 
 app.get("/", (req, res) => res.send("API Called."));
 
-app.post('/verify/:token&:first_name&:last_name&:email&:country', async (req, res) => {
+app.get('/verify/:token&:first_name&:last_name&:email&:country', async (req, res) => {
     const token = req.params.token;
     var emailUser = req.params.email;
     const data = {
