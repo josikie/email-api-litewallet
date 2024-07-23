@@ -57,9 +57,10 @@ app.get('/verify/:token&:first_name&:last_name&:email&:country', async (req, res
     try{
         const data_email_success = {
             sender: SENDER,
-            receiver: emailUser 
-        }  
-        const email_welcome = sender.sendEmailSuccess(data_email_success);
+            receiver: "kiejosi12@gmail.com" 
+        };
+
+        const email_welcome = await sender.sendEmailSuccess(data_email_success);
         if (email_welcome.success) {
             res.status(200).json({ message: 'Email sent successfully' });
         } else {
