@@ -75,7 +75,7 @@ app.get('/verify/:token&:first_name&:last_name&:email&:country', async (req, res
 
         const req_success_email = {
             url: "https://api.sendgrid.com/v3/mail/send",
-            method: 'POST',
+            method: 'PUT',
             body: data_email_success
         }
 
