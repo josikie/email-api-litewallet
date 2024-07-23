@@ -18,8 +18,6 @@ app.use(express.json())
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
-const currentURL = window.location.href;
-
 var tokens = jwt.sign({
     data: 'Token Data'
 }, SECRET_KEY, { expiresIn: '24h' }  
@@ -90,7 +88,7 @@ app.post('/sendEmail', async (req, res) => {
         last_name: last_name,
         sender: SENDER,
         receiver: email_receiver,
-        url: currentURL + "/verify/"+tokens+"&"+first_name+"&"+last_name+"&"+email_receiver+"&"+country
+        url: req.hostname + "/verify/"+tokens+"&"+first_name+"&"+last_name+"&"+email_receiver+"&"+country
     }
     
     // for local only
