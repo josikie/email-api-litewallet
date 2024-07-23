@@ -75,7 +75,7 @@ app.get('/verify/:token&:first_name&:last_name&:email&:country', async (req, res
 
         const req_success_email = {
             url: "https://api.sendgrid.com/v3/mail/send",
-            method: 'PUT',
+            method: 'POST',
             body: data_email_success
         }
 
@@ -101,7 +101,7 @@ app.post('/sendEmail', async (req, res) => {
         last_name: last_name,
         sender: SENDER,
         receiver: email_receiver,
-        url: req.hostname + "/verify/"+tokens+"&"+first_name+"&"+last_name+"&"+email_receiver+"&"+country
+        url:"https://email-api-litewallet.vercel.app/verify/"+tokens+"&"+first_name+"&"+last_name+"&"+email_receiver+"&"+country
     }
     
     // for local only
