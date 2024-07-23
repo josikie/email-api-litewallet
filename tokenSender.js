@@ -37,11 +37,15 @@ async function sendEmailSuccess(data){
     };
 
     try {
-        await sgMail.send(msg);
+        const res = await sgMail.send(msg);
+        console.log(res);
         console.log("Email Sent!");
         return { success: true, message: "Email sent successfully" };
     } catch (error) {
         console.error(error);
+        console.log("\n");
+        console.log(res);
+        console.log("\n");
         return { success: false, message: error };
     }
 }

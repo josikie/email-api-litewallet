@@ -26,7 +26,7 @@ app.get("/", (req, res) => res.send("API Called."));
 
 app.get('/verify/:token&:first_name&:last_name&:email&:country', async (req, res) => {
     const token = req.params.token;
-    const emailUser = req.params.email;
+    var emailUser = req.params.email;
     const data = {
         "contacts": [
             {
@@ -36,11 +36,6 @@ app.get('/verify/:token&:first_name&:last_name&:email&:country', async (req, res
                 "country": req.params.country,
             }
         ]
-    }
-    const request = {
-        url: "https://api.sendgrid.com/v3/marketing/contacts",
-        method: 'PUT',
-        body: data
     }
 
     try {
